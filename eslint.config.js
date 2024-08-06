@@ -48,7 +48,16 @@ module.exports = tseslint.config(
           allowClassEnd: true,
         },
       ],
-      'max-len': ['error'],
+      'max-len': [
+        'error',
+        {
+          code: 80,
+          ignoreUrls: true,
+          ignoreStrings: true,
+          ignoreTemplateLiterals: true,
+          ignoreRegExpLiterals: true,
+        },
+      ],
       'arrow-body-style': ['error', 'as-needed'],
       '@angular-eslint/no-empty-lifecycle-method': 'error',
       '@angular-eslint/use-lifecycle-interface': 'error',
