@@ -1,0 +1,62 @@
+<p-tree
+  [value]="nodes"
+  class="w-full"
+  selectionMode="single"
+  [(selection)]="selectedNode"
+  [draggableNodes]="draggable"
+  [droppableNodes]="draggable"
+  draggableScope="self"
+  droppableScope="self"
+  (onNodeSelect)="onNodeSelect($event)"
+  (onNodeExpand)="onNodeExpand($event)"
+  [validateDrop]="draggable"
+  (onNodeDrop)="onDropNode($event)"
+  [emptyMessage]="emptyMessage"
+  [contextMenu]="cm"
+  loadingMode="icon"
+>
+  <ng-template let-node pTemplate="default">
+    <div
+      class="flex align-items-center justify-content-between"
+      (mouseover)="mouseOver(node)"
+      (mouseout)="mouseLeave()"
+      (focus)="mouseOver(node)"
+      (blur)="mouseLeave()"
+      (mousedown)="mouseDown($event, node)"
+      (mouseup)="mouseUp($event)"
+    >
+      <div class="flex align-items-center">
+        <span class="node-label">{{ node.data.name }}</span>
+      </div>
+
+      @if (hoveredNode === node.key) {
+        <div>
+          @if (canAdd) {
+            <p-button
+              class="text-sm"
+              size="small"
+              icon="pi pi-plus"
+              [rounded]="true"
+              [text]="true"
+              (click)="onAddClicked($event)"
+            />
+          }
+          <p-button
+            class="text-sm"
+            size="small"
+            icon="pi pi-ellipsis-h"
+            [rounded]="true"
+            [text]="true"
+            (click)="onMenuClicked($event, node)"
+          />
+        </div>
+      }
+    </div>
+  </ng-template>
+  <ng-template pTemplate="empty">
+    <div class="m-4">
+      <span>{{ emptyMessage }}</span>
+    </div>
+  </ng-template>
+</p-tree>
+<p-contextMenu #cm [model]="itemsMenu" (onHide)="onHide()" />
