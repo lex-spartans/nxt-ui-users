@@ -1,13 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-
 import { GetJsonService } from '../services/get-json.service';
 
 /**
  * Description placeholder
  *
  * @export
- * @class AppComponent
+ * @class Component
  * @typedef {AppComponent}
  */
 @Component({

@@ -1,5 +1,4 @@
 import { InjectionToken } from '@angular/core';
-
 import { IEnvironments } from '../../interfaces/iEnvironments';
 
 /**

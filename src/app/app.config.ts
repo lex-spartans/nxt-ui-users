@@ -3,7 +3,6 @@ import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 
-
 import { environment } from '../environments/environment.dev';
 import { IEnvironments } from '../interfaces/iEnvironments';
 
