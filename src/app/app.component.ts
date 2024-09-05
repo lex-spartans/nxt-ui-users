@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { Component, inject, OnInit } from '@angular/core';
+=======
+import { Component, OnInit } from '@angular/core';
+>>>>>>> 568cc1e (add configuration to project of injectionToken and enviroments)
 import { RouterOutlet } from '@angular/router';
 import { GetJsonService } from '../services/get-json.service';
 
