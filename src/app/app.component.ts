@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { GetJsonService } from '../services/get-json.service';
 
 /**
  * Description placeholder
@@ -15,7 +16,7 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   /**
    * Description placeholder
    *
@@ -24,12 +25,17 @@ export class AppComponent {
    */
   public title!: string;
 
+  constructor(private getService: GetJsonService) {}
+
   /**
    * Description placeholder
    *
    * @public
    */
-  public init(): void {
+  public ngOnInit(): void {
+    this.getService.getdata().subscribe((res: unknown) => {
+      console.log('🚀 ~ AppComponent ~ this.getService.getdata ~ res:', res);
+    });
     this.title = 'Hello, Smarters!';
   }
 }
