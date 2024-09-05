@@ -1,0 +1,24 @@
+:host ::ng-deep .p-tree .p-tree-filter-container {
+  padding: 20px;
+  background-color: #fafafa;
+}
+:host ::ng-deep .p-tree .p-tree-filter-container .p-tree-filter-icon {
+  right: 2rem;
+}
+:host ::ng-deep .p-tree {
+  border: none;
+  padding: 0px;
+}
+:host ::ng-deep .p-tree .p-tree-container .p-treenode .p-treenode-content {
+  border-radius: 10px;
+}
+:host ::ng-deep .p-treenode-label {
+  width: 100%;
+}
+:host ::ng-deep .p-button.p-button-icon-only.p-button-rounded {
+  height: 2.5rem;
+  width: 2.5rem;
+}
+.node-label {
+  margin-left: 8px;
+}
