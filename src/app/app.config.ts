@@ -6,6 +6,7 @@ import { environment } from '../environments/environment.dev';
 import { IEnvironments } from '../interfaces/iEnvironments';
 import { ENV_CONFIG } from '../shared/tokens/environments-config';
 import { routes } from './app.routes';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 /**
  * Description placeholder
@@ -21,5 +22,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
+    provideAnimations(),
   ],
 };
