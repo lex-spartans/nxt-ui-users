@@ -13,7 +13,7 @@ export class GetJsonService {
     @Inject(ENV_CONFIG) private environment: IEnvironments,
     private httClient: HttpClient,
   ) {
-    this.baseUrl = this.environment.baseUrl;
+    this.baseUrl = `${this.environment.baseUrl}`;
   }
 
   public getdata(): Observable<unknown> {

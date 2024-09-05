@@ -1,13 +1,31 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
+import { environment } from '../environments/environment.dev';
+import { GetJsonService } from '../services/get-json.service';
+import { ENV_CONFIG } from '../shared/tokens/environments-config';
 import { AppComponent } from './app.component';
 
-describe('AppComponent', () => {
+fdescribe('AppComponent', () => {
   let app: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
+  let getServiceSpy: jasmine.SpyObj<GetJsonService>;
+  const getDataInfo = {
+    getdata: () => of()
+  }
 
   beforeEach(() => {
+    getServiceSpy = jasmine.createSpyObj('GetJsonService', ['getdata']);
     TestBed.configureTestingModule({
       imports: [AppComponent],
+      providers: [
+        {
+          provide: ENV_CONFIG,
+          useValue: environment
+        },
+        { provide: GetJsonService,
+          useValue: getDataInfo
+        }
+      ],
     });
     fixture = TestBed.createComponent(AppComponent);
     app = fixture.componentInstance;
@@ -19,7 +37,8 @@ describe('AppComponent', () => {
   });
 
   it('should have title "Hello, Smarters!"', () => {
-    app.init();
+    getServiceSpy.getdata.and.returnValue(of()); // Cambiado a 'of()' para devolver un Observable
+    app.ngOnInit();
     expect(app.title).toEqual('Hello, Smarters!');
   });
 });

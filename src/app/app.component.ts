@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { GetJsonService } from '../services/get-json.service';
 
@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
    */
   public title!: string;
 
-  constructor(private getService: GetJsonService) {}
+  private getService: GetJsonService = inject(GetJsonService);
 
   /**
    * Description placeholder
