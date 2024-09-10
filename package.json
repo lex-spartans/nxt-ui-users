@@ -7,6 +7,8 @@
     "start:nxt360": "concurrently \"json-server --port 3000 ./middleware/db.json\" \"ng serve --port 4205\"",
     "dev": "concurrently \"json-server --port 3000 ./middleware/db.json\" \"ng serve --configuration=dev --port 4206\"",
     "uat": "concurrently \"ng serve --configuration=uat --port 4206\"",
+    "qa": "concurrently \"ng serve --configuration=qa --port 4206\"",
+    "pro": "concurrently \"ng serve --configuration=pro --port 4206\"",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
