@@ -1,11 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { GetJsonService } from '../services/get-json.service';
 
 /**
  * Description placeholder
  *
- * @export
+ * @class
  * @class Component
  * @typedef {AppComponent}
  */
@@ -25,17 +24,12 @@ export class AppComponent implements OnInit {
    */
   public title!: string;
 
-  private getService: GetJsonService = inject(GetJsonService);
-
   /**
    * Description placeholder
    *
    * @public
    */
   public ngOnInit(): void {
-    this.getService.getdata().subscribe((res: unknown) => {
-      console.log('🚀 ~ AppComponent ~ this.getService.getdata ~ res:', res);
-    });
     this.title = 'Hello, Smarters!';
   }
 }

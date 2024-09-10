@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
+
 import { TreeComponent } from '../../organisms/tree/tree.component';
 
+/**
+ *
+ */
 @Component({
   selector: 'app-lateral-layout',
   standalone: true,

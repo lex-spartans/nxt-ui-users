@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { inject, Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { ENV_CONFIG } from '../app/shared/tokens/environments-config';
@@ -8,7 +8,7 @@ import { IEnvironments } from '../interfaces/iEnvironments';
 /**
  * Description placeholder
  *
- * @export
+ * @class
  * @class GetJsonService
  * @typedef {GetJsonService}
  */
@@ -16,6 +16,9 @@ import { IEnvironments } from '../interfaces/iEnvironments';
   providedIn: 'root',
 })
 export class GetJsonService {
+  private httpClient: HttpClient = inject(HttpClient);
+  @Inject(ENV_CONFIG) private environment: IEnvironments = inject(ENV_CONFIG);
+
   /**
    * Description placeholder
    *
@@ -27,14 +30,10 @@ export class GetJsonService {
   /**
    * Creates an instance of GetJsonService.
    *
-   * @constructor
-   * @param {IEnvironments} environment
-   * @param {HttpClient} httClient
+   * @class
+   *
    */
-  constructor(
-    @Inject(ENV_CONFIG) private environment: IEnvironments,
-    private httClient: HttpClient,
-  ) {
+  constructor() {
     this.baseUrl = `${this.environment.baseUrl}`;
   }
 
@@ -45,6 +44,6 @@ export class GetJsonService {
    * @returns {Observable<unknown>}
    */
   public getdata(): Observable<unknown> {
-    return this.httClient.get(`${this.baseUrl}/posts/1`);
+    return this.httpClient.get(`${this.baseUrl}/posts/1`);
   }
 }
