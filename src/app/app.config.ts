@@ -1,12 +1,14 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { environment } from '../environments/environment.dev';
 import { IEnvironments } from '../interfaces/iEnvironments';
-import { ENV_CONFIG } from '../shared/tokens/environments-config';
+
 import { routes } from './app.routes';
-import { provideAnimations } from '@angular/platform-browser/animations';
+import { authInterceptorInterceptor } from './shared/interceptors/auth-interceptor.interceptor';
+import { ENV_CONFIG } from './shared/tokens/environments-config';
 
 /**
  * Description placeholder
@@ -19,7 +21,7 @@ export const appConfig: ApplicationConfig = {
       provide: ENV_CONFIG,
       useValue: environment as unknown as IEnvironments,
     },
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([authInterceptorInterceptor])),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideAnimations(),
