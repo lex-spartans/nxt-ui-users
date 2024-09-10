@@ -2,8 +2,6 @@
   "name": "base-app",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
     "start:nxt360": "concurrently \"json-server --port 3000 ./middleware/db.json\" \"ng serve --port 4205\"",
     "dev": "concurrently \"json-server --port 3000 ./middleware/db.json\" \"ng serve --configuration=dev --port 4206\"",
     "uat": "concurrently \"ng serve --configuration=uat --port 4206\"",
