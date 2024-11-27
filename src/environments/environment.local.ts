@@ -18,5 +18,5 @@ export const environment: IEnvironments = {
    *
    * @type {string}
    */
-  baseUrl: 'http://localhost:3000/pro',
+  baseUrl: 'http://localhost:3000/local',
 };

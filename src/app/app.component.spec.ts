@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { environment } from '../environments/environment.dev';
+import { environment } from '../environments/environment';
 import { GetJsonService } from '../services/get-json.service';
 import { AppComponent } from './app.component';
 import { ENV_CONFIG } from './shared/tokens/environments-config';
