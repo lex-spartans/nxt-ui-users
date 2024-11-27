@@ -1,11 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
-@import 'primeng/resources/themes/md-light-deeppurple/theme.css';
-@import 'primeng/resources/primeng.css';
-@import 'primeicons/primeicons.css';
-@import 'primeflex/primeflex.css';
-
-html,
-body {
+html, body {
+  font-family: var(--font-family-nxt-360), serif;
   height: 100%;
   margin: 0;
+}
+
+:root {
+  --Base-White: #fff;
+  --primary-color: #8B5CF6;
 }
