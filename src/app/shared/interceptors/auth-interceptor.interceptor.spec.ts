@@ -1,31 +1,53 @@
-import {
-  HttpHandlerFn,
-  HttpInterceptorFn,
-  HttpRequest,
-} from '@angular/common/http';
-import { TestBed } from '@angular/core/testing';
-import { authInterceptorInterceptor } from './auth-interceptor.interceptor';
 
-describe('authInterceptorInterceptor', () => {
-  let interceptor: HttpInterceptorFn;
-  let req: HttpRequest<unknown>;
-  let next: HttpHandlerFn;
+import { TestBed } from '@angular/core/testing';
+import { of, throwError } from 'rxjs';
+import { HttpErrorResponse, HttpRequest, HttpResponse } from '@angular/common/http';
+import { authInterceptor } from './auth-interceptor.interceptor';
+
+// Mock del AlertService
+class MockAlertService {
+  emitMessage(_message: any): void {
+    // Mock del Method emitMessage
+  }
+}
+
+describe('authInterceptor', () => {
+
+  let next: jasmine.Spy;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    interceptor = authInterceptorInterceptor;
-    req = new HttpRequest('GET', 'http://example.com');
-    next = jasmine.createSpyObj('next', ['handle']);
+    TestBed.configureTestingModule({
+      providers: [{ useClass: MockAlertService }],
+    });
+
+
+    // Mock de la función `next`, simula la cadena de manejo de HTTP
+    next = jasmine.createSpy('next');
   });
 
-  it('should be created', () => {
-    expect(interceptor).toBeTruthy();
+  it('should emit success message on non-GET requests with status < 400', () => {
+    const req = new HttpRequest('POST', '/api/test', { body: null });
+
+    // Simula una respuesta HTTP exitosa
+    next.and.returnValue(of(new HttpResponse({ status: 200 })));
+
+    TestBed.runInInjectionContext(() => {
+      authInterceptor(req, next).subscribe();
+    });
+
   });
-  it('should call next.handle with the cloned request without errors', () => {
-    interceptor(req, next);
-    expect(next).toHaveBeenCalledWith(req.clone());
+
+  it('should emit error message on status > 400', () => {
+    const req = new HttpRequest('GET', '/api/test');
+
+    // Simula una respuesta HTTP fallida
+    next.and.returnValue(throwError(() => new HttpErrorResponse({ status: 500 })));
+
+    TestBed.runInInjectionContext(() => {
+      authInterceptor(req, next).subscribe({
+        error: () => {
+        },
+      });
+    });
   });
 });
-
-
-

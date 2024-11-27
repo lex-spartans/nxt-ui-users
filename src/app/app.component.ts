@@ -1,21 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+
+import { LangService } from '../services/lang.service';
 
 /**
- * Description placeholder
+ * Main application component that displays
+ * a welcome message and handles alert messages.
  *
  * @class
- * @class Component
- * @typedef {AppComponent}
+ * @class AppComponent
+ * @type {AppComponent}
  */
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, TranslateModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
+  /**
+   * Language Service
+   *
+   * @private
+   * @type {LangService}
+   */
+  private _langService: LangService = inject(LangService);
+
   /**
    * Description placeholder
    *
@@ -25,11 +37,21 @@ export class AppComponent implements OnInit {
   public title!: string;
 
   /**
+   * Instance constructor
+   */
+  // eslint-disable-next-line no-unused-vars
+  constructor() {
+    const language: string = this._langService.getLanguage();
+    this._langService.changeLanguage(language);
+  }
+
+  /**
    * Description placeholder
    *
    * @public
    */
   public ngOnInit(): void {
-    this.title = 'Hello, Smarters!';
+
+    this.title = 'Smarters!';
   }
 }
