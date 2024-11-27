@@ -1,0 +1,6 @@
+node_modules/*
+package-lock.json
+yarn.lock
+src/*.ts
+**/*.spec.ts
+src/index.html
