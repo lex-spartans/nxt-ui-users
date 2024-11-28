@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "nxt-ui-base-template": {
+    "nxt-ui-users": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -21,7 +21,7 @@
           },
           "configurations": {
             "local": {
-              "target": "nxt-ui-base-template:esbuild:local",
+              "target": "nxt-ui-users:esbuild:local",
               "dev": true,
               "fileReplacements": [
                 {
@@ -31,7 +31,7 @@
               ]
             },
             "dev": {
-              "target": "nxt-ui-base-template:esbuild:dev",
+              "target": "nxt-ui-users:esbuild:dev",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -40,7 +40,7 @@
               ]
             },
             "qa": {
-              "target": "nxt-ui-base-template:esbuild:qa",
+              "target": "nxt-ui-users:esbuild:qa",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -49,7 +49,7 @@
               ]
             },
             "uat": {
-              "target": "nxt-ui-base-template:esbuild:uat",
+              "target": "nxt-ui-users:esbuild:uat",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -58,7 +58,7 @@
               ]
             },
             "pro": {
-              "target": "nxt-ui-base-template:esbuild:pro",
+              "target": "nxt-ui-users:esbuild:pro",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -72,26 +72,26 @@
         "serve": {
           "builder": "@angular-architects/native-federation:build",
           "options": {
-            "target": "nxt-ui-base-template:serve-original:dev",
+            "target": "nxt-ui-users:serve-original:dev",
             "rebuildDelay": 0,
             "dev": true,
             "port": 0
           },
           "configurations": {
             "local": {
-              "target": "nxt-ui-base-template:serve-original:local"
+              "target": "nxt-ui-users:serve-original:local"
             },
             "dev": {
-              "target": "nxt-ui-base-template:serve-original:dev"
+              "target": "nxt-ui-users:serve-original:dev"
             },
             "qa": {
-              "target": "nxt-ui-base-template:serve-original:qa"
+              "target": "nxt-ui-users:serve-original:qa"
             },
             "uat": {
-              "target": "nxt-ui-base-template:serve-original:uat"
+              "target": "nxt-ui-users:serve-original:uat"
             },
             "pro": {
-              "target": "nxt-ui-base-template:serve-original:pro"
+              "target": "nxt-ui-users:serve-original:pro"
             }
           },
           "defaultConfiguration": "local"
@@ -133,7 +133,7 @@
         "esbuild": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/nxt-ui-base-template",
+            "outputPath": "dist/nxt-ui-users",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -233,23 +233,23 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "local": {
-              "buildTarget": "nxt-ui-base-template:esbuild:local",
+              "buildTarget": "nxt-ui-users:esbuild:local",
               "port": 4201
             },
             "dev": {
-              "buildTarget": "nxt-ui-base-template:esbuild:dev",
+              "buildTarget": "nxt-ui-users:esbuild:dev",
               "port": 4202
             },
             "qa": {
-              "buildTarget": "nxt-ui-base-template:esbuild:qa",
+              "buildTarget": "nxt-ui-users:esbuild:qa",
               "port": 4203
             },
             "uat": {
-              "buildTarget": "nxt-ui-base-template:esbuild:uat",
+              "buildTarget": "nxt-ui-users:esbuild:uat",
               "port": 4204
             },
             "pro": {
-              "buildTarget": "nxt-ui-base-template:esbuild:pro",
+              "buildTarget": "nxt-ui-users:esbuild:pro",
               "port": 4205
             }
           },

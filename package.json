@@ -1,5 +1,5 @@
 {
-  "name": "nxt-ui-base-template",
+  "name": "nxt-ui-users",
   "version": "0.0.0",
   "scripts": {
     "start:local": "concurrently \"json-server --port 3000 ./middleware/db.json\" \"ng serve --configuration=local\"",
