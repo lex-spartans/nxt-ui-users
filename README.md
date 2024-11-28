@@ -1,6 +1,6 @@
-# Nxt UI Base Template
+# Nxt UI Users
 
-Nxt UI Base Template is a collection of UI components for Angular. It provides a set of reusable components that follow
+Nxt UI Users is a collection of UI components for Angular. It provides a set of reusable components that follow
 modern design practices and patterns.
 
 ## Versioning
@@ -10,7 +10,7 @@ We use Semantic Versioning for versioning. For a list of changes in each version
 ## Contact
 
 For any questions or suggestions, please contact the maintainers
-via [GitHub Issues](https://github.com/SmartPaymentServices/nxt-ui-base-template/issues) or send an email
+via [GitHub Issues](https://github.com/SmartPaymentServices/nxt-ui-users/issues) or send an email
 to [contact@your-domain.com](mailto:contact@your-domain.com).
 
 ## Acknowledgements

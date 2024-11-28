@@ -4,7 +4,7 @@ const {
 } = require('@angular-architects/native-federation/config');
 
 module.exports = withNativeFederation({
-  name: 'nxt-ui-base-template',
+  name: 'nxt-ui-users',
 
   exposes: {
     './Component': './src/app/app.component.ts',
