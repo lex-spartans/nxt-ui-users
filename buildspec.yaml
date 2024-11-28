@@ -1,0 +1,61 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - echo Nothing to do in runtime-versions
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - git clone https://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@github.com/SmartPaymentServices/nxt-ui-users.git
+      - aws --version
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 471112966477.dkr.ecr.us-east-1.amazonaws.com
+      - REPOSITORY_URI=471112966477.dkr.ecr.us-east-1.amazonaws.com/nxt-ui-users
+      - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
+      - echo "El tag de la imagen es:"
+      - echo $IMAGE_TAG
+      - IMAGE_NAME=nxt-ui-users
+      - echo "Update Image tag in kubernetes manifest"
+      - sed -i 's@CONTAINER_IMAGE@'"$REPOSITORY_URI:$IMAGE_TAG"'@' manifest/kube.yaml
+      - # Update Kube config Home Directory
+      - export KUBECONFIG=$HOME/.kube/config
+  build:
+    commands:
+      - echo Create Node Image ...
+      - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
+      - echo Version Image $IMAGE_TAG
+      - echo Build started on `date`
+      - echo Building docker image
+      - docker build -t nxt-ui-users .
+      - echo List all images
+      - docker images
+      - docker tag nxt-ui-users:latest 471112966477.dkr.ecr.us-east-1.amazonaws.com/nxt-ui-users:$IMAGE_TAG
+  post_build:
+    commands:
+      - echo Build complete on `date`
+      - echo Pushing to repo
+      - docker push 471112966477.dkr.ecr.us-east-1.amazonaws.com/nxt-ui-users:$IMAGE_TAG
+      - echo Writing image definition file
+      - DOCKER_CONTAINER_NAME=nxt-ui-users
+      - printf '[{"name":"%s","imageUri":"%s"}]' $DOCKER_CONTAINER_NAME $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - echo $DOCKER_CONTAINER_NAME
+      - echo printing imagedefinitions.json
+      - cat imagedefinitions.json
+      - echo "Update Kube Config configuration"
+      - aws eks update-kubeconfig --name $EKS_CLUSTERNAME
+      - echo "Show deployment file"
+      - cat manifest/kube.yaml
+      # Show time, applying manifests changes using kubectl
+      - echo "Apply changes to kube manifests"
+      - kubectl apply -f manifest/
+      - echo "All done!!!! Kubernetes changes applied"
+      # Create Artifacts which we can use if we want to continue our pipeline for other stages
+      - printf '[{"name":"kube.yaml","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > build.json
+artifacts:
+  files:
+    - imagedefinitions.json
+    - manifests/*
+    - app.js
+    - index.html
+    - package.json
+    - node_modules/async/*
+    - node_modules/lodash/*
