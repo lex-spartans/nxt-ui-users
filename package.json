@@ -19,7 +19,8 @@
     "lint": "eslint \"src/**/*.ts\" --fix",
     "test": "ng test --code-coverage --watch",
     "setup:library": "./setup-nxt-ui-library.sh",
-    "generate:commit-pr-with-ai": "commit-pr-generator"
+    "clean:all": "rm -rf node_modules/ dist/ coverage/ documentation/ reports/ package-lock.json .angular/ && npm cache clean --force",
+    "commit-pr-generator": "commit-pr-generator"
   },
   "private": true,
   "dependencies": {

@@ -25,8 +25,7 @@
 
 # FROM 767397882540.dkr.ecr.us-east-1.amazonaws.com/node
 FROM ENVIROMENT_ACCOUNT.dkr.ecr.us-east-1.amazonaws.com/node AS build-env
-# pruebas locales
-# FROM node:18-alpine
+#FROM node:18-alpine AS build-env
 
 # Set principal work directory
 WORKDIR /usr/src/app
@@ -39,7 +38,7 @@ RUN npm install -g @angular/cli
 
 # Remove specific dependencies and lock file
 RUN sed -i '/SmartPaymentServices\/nxt-ui-library/d' package.json
-RUN rm -rf node_modules package-lock.json
+RUN rm -rf node_modules/ dist/ coverage/ documentation/ reports/ package-lock.json .angular/ && npm cache clean --force
 
 # Set the npm registry
 RUN npm config set registry https://registry.npmjs.org
@@ -50,6 +49,8 @@ RUN npm config set registry https://npm.pkg.github.com/
 RUN npm install @smartpaymentservices/nxt-ui-library --legacy-peer-deps
 RUN npm config set registry https://registry.npmjs.org/
 
+RUN cat node_modules/@smartpaymentservices/nxt-ui-library/package.json
+
 # RUN npm run build:qa
 RUN ng build --configuration=dev --base-href=/
 
@@ -57,7 +58,7 @@ RUN ls -la
 
 # Get a fresh version of nginx for the final image
 FROM ENVIROMENT_ACCOUNT.dkr.ecr.us-east-1.amazonaws.com/nginx
-# FROM nginx:alpine
+#FROM nginx:alpine
 
 # Copy compile data
 COPY --from=build-env /usr/src/app/dist/nxt-ui-users/browser /usr/share/nginx/html
